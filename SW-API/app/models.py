@@ -11,6 +11,18 @@ class Usuarios(db.Model):
     tienda = db.Column(db.String(50))
     fecha_registro = db.Column(db.Date)
 
+    def serialize(self):
+        return {
+            'idUsuario': self.idUsuario,
+            'nombre': self.nombre,
+            'apellido': self.apellido,
+            'correo': self.correo,
+            'telefono': self.telefono,
+            'tipo': self.tipo,
+            'tienda': self.tienda,
+            'fecha_registro': self.fecha_registro.strftime('%Y-%m-%d') if self.fecha_registro else None
+        }
+
 class Entregas(db.Model):
     idEntrega = db.Column(db.Integer, primary_key=True, autoincrement=True)
     idSolicitud = db.Column(db.Integer, db.ForeignKey('solicitudes.idEntrega'))

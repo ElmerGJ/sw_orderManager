@@ -18,10 +18,10 @@ jwt = JWTManager(app)
 from app.models import Usuarios, Entregas, Solicitudes
 
 # Importa las rutas después de inicializar db
-from app.routes import usuarios, solicitudes, entregas, admin, cliente
+from app.routes import admin, cliente, repartidor, authentication
 
-app.register_blueprint(usuarios.usuarios_bp)
 app.register_blueprint(cliente.cliente_bp)
 app.register_blueprint(admin.admin_bp)
-app.register_blueprint(solicitudes.solicitudes_bp)
-app.register_blueprint(entregas.entregas_bp)
+app.register_blueprint(repartidor.repartidor_bp)
+app.register_blueprint(authentication.authentication_bp)
+
