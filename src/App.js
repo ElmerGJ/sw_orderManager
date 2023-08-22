@@ -1,28 +1,27 @@
-import './App.css';
-import BottomMenu from './components/Nav/BottomMenu';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Deliveries from './pages/Deliveries';
-import Requests from './pages/Requests';
-import Stats from './pages/Stats';
-import Settings from './pages/Settings';
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import Login from './components/Login';
+import LandingPage from './components/LandingPage';
 
+const App = () => {
+  const [loggedIn, setLoggedIn] = useState(false);
 
-function App() {
-  return (  
-      <div>
-          <Router>
-              <div>
-              <Routes>
-                  <Route path="/deliveries" element={<Deliveries/>}/>
-                  <Route path='/requests' element={<Requests/>}/>
-                  <Route path='/stats' element={<Stats/>}/>
-                  <Route path='/settings' element={<Settings/>}/>
-              </Routes>
-            </div>
-            <BottomMenu />
-          </Router>
-      </div>
+  // Check for token in local storage on initial render
+  useEffect(() => {
+      const token = localStorage.getItem('token');
+      if (token) {
+          setLoggedIn(true);
+      }
+  }, []);
+
+  return (
+      <Router>
+          <Routes>
+              <Route path="/login" element={loggedIn ? <Navigate to="/landing" /> : <Login setLoggedIn={setLoggedIn} />} />
+              <Route path="/landing" element={loggedIn ? <LandingPage setLoggedIn={setLoggedIn} /> : <Navigate to="/login" />} />
+          </Routes>
+      </Router>
   );
-}
+};
 
 export default App;
