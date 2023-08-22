@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import { BottomNavigation, BottomNavigationAction } from '@mui/material';
 import NavButton from '../Buttons/NavButton';
 import btn1 from '../../assets/deliveries_button.png';  // Importing the image
-import btn2 from '../../assets/def_button.png';  // Importing the image
+import btn2 from '../../assets/requests_button.png';  // Importing the image
 import btn3 from '../../assets/stats_button.png';  // Importing the image
 import btn4 from '../../assets/settings_button.png';  // Importing the image
 
