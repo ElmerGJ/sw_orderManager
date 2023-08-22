@@ -36,6 +36,17 @@ const Login = ({ setLoggedIn }) => {
             <label>Contraseña:</label>
             <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
             <button onClick={handleLogin}>Iniciar Sesión</button>
+            
+            {/*IGNORE LOGIN*/}
+            <div>
+                <form action="/deliveries">
+                    <button>
+                        IGNORE LOGIN
+                    </button>
+                </form>
+            </div>
+            {/*END    */}
+            
         </div>
     );
 };
