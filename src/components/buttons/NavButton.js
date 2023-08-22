@@ -1,9 +1,10 @@
 
 import { useNavigate } from 'react-router-dom';
-import ButtonBase from '@mui/material/ButtonBase';
-import buttonImage from '../../assets/deliveries_button.png';  // Importing the image
+import {ButtonBase} from '@mui/material';
+// import buttonImage from '../../assets/deliveries_button.png';  // Importing the image
 
-function NavButton({route, icon}){
+
+const NavButton = ({route, icon}) => {
   const navigate = useNavigate()
 
   const handleClick = () => {
