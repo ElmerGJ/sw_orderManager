@@ -1,6 +1,7 @@
 from flask import Blueprint, jsonify, request
-from app.models import Solicitudes, Usuarios, db
+from app.models import Solicitudes, Usuarios, db, Entregas
 from datetime import datetime
+from flask_jwt_extended import jwt_required, get_jwt_identity
 
 cliente_bp = Blueprint('cliente', __name__)
 
@@ -40,6 +41,29 @@ def crear_solicitud():
     return jsonify({"mensaje": "Solicitud creada exitosamente"})
 
 @cliente_bp.route('/api/cliente/mis-solicitudes', methods=['GET'])
+@jwt_required()
 def mis_solicitudes():
-    # Aquí debes implementar la lógica para obtener y devolver las solicitudes del cliente
-    return jsonify({"mensaje": "Mis solicitudes"})
+    id_cliente = get_jwt_identity()
+
+    solicitudes = Solicitudes.query.filter_by(idSolicitante=id_cliente).all()
+
+    solicitudes_data = []
+    for solicitud in solicitudes:
+        entrega = Entregas.query.filter_by(idSolicitud=solicitud.idSolicitud).first()
+
+        repartidor_nombre = None
+        if entrega and entrega.idChofer:
+            repartidor = Usuarios.query.get(entrega.idChofer)
+            repartidor_nombre = repartidor.nombre if repartidor else None
+        
+        solicitud_data = {
+            "idSolicitud": solicitud.idSolicitud,
+            "cliente": solicitud.cliente,
+            "nombre_repartidor": repartidor_nombre,
+            "estado_entrega": entrega.estado if entrega else None,
+            "id_cliente": id_cliente,
+            "id_repartidor": entrega.idChofer if entrega else None
+        }
+        solicitudes_data.append(solicitud_data)
+    
+    return jsonify({"solicitudes": solicitudes_data})

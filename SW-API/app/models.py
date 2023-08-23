@@ -25,12 +25,12 @@ class Usuarios(db.Model):
 
 class Entregas(db.Model):
     idEntrega = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    idSolicitud = db.Column(db.Integer, db.ForeignKey('solicitudes.idEntrega'))
+    idSolicitud = db.Column(db.Integer, db.ForeignKey('solicitudes.idSolicitud'))
     estado = db.Column(db.String(50))
     idChofer = db.Column(db.Integer, db.ForeignKey('usuarios.idUsuario'))
 
 class Solicitudes(db.Model):
-    idEntrega = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    idSolicitud = db.Column(db.Integer, primary_key=True, autoincrement=True)
     cliente = db.Column(db.String(100))
     fecha_entrega = db.Column(db.Date)
     lugar = db.Column(db.String(100))

@@ -10,7 +10,7 @@ def listar_solicitudes():
     solicitudes = Solicitudes.query.all()
     solicitudes_json = [
         {
-            'idEntrega': solicitud.idEntrega,
+            'idSolicitud': solicitud.idSolicitud,
             'cliente': solicitud.cliente,
             'fecha_entrega': solicitud.fecha_entrega,
             'lugar': solicitud.lugar,
