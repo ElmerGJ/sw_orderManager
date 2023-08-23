@@ -8,7 +8,7 @@ const ExitButton = () => {
     // Implement the logic to perform the exit action
     // For example, you can clear localStorage and navigate to the login page
     localStorage.clear();
-    window.location.href = '/login'; // Change this URL to your login page
+    window.location.href = '/'; // Change this URL to your login page
   };
 
   return (

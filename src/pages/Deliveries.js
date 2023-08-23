@@ -1,48 +1,36 @@
 import React from 'react';
-import { Container, Box } from '@mui/material';
+import { Container } from '@mui/material';
 import BottomMenu from '../components/nav/BottomMenu';
-import AccountButton from '../components/buttons/AccountButton';
-import ItemsStack from '../components/containers/ItemsStack'; // Import the updated ItemsStack component
-import ExitButton from '../components/buttons/ExitButton'; // Import the ExitButton component
-import Logo from '../assets/logo.svg'; // Import the logo SVG
-import { useNavigate } from 'react-router-dom';
+import TopContainer from '../components/containers/TopContainer'; // Import the TopContainer component
+import ContentContainer from '../components/containers/ContentContainer'; // Import the ContentContainer component
+import ActionsContainer from '../components/containers/ActionsContainer'; // Import the ActionsContainer component
+import FilerContainer from '../components/containers/FilterContainer';
+import TitlePage from '../components/TitlePage';
 
 const Deliveries = () => {
-  const navigate = useNavigate();
+    return (
+        <Container maxWidth="sm" sx={{ padding: 2 }}>
+            {/* Top Container */}
+            <TopContainer />
 
-  const handleItemClick = (itemId) => {
-    navigate(`/delivery-view/${itemId}`);
-  };
+            {/* Title Page Container */}
+            <TitlePage title={'Entregas'}/>
 
-  return (
-    <Container maxWidth="sm" sx={{ padding: 2 }}>
-      <Box
-        sx={{
-          mb: 2,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-        }}
-      >
-        {/* Account Button */}
-        <AccountButton />
+            {/* Filter Container */}
+            <FilerContainer />
 
-        {/* Logo */}
-        <img src={Logo} alt="Logo" style={{ height: '40px', width: 'auto' }} />
+            {/* Scrollable Content Container */}
+            <div style={{ maxHeight: 'calc(100vh - 350px)', overflowY: 'auto', padding: '10px' }}>
+                <ContentContainer />
+            </div>
 
-        {/* Exit Button */}
-        <ExitButton />
-      </Box>
+            {/* Actions Container */}
+            <ActionsContainer />
 
-      <Box sx={{ mb: 2 }}>
-        {/* Container for ItemsStack */}
-        <ItemsStack onItemClick={handleItemClick} />
-      </Box>
-
-      {/* BottomMenu */}
-      <BottomMenu selectedRoute="/deliveries" />
-    </Container>
-  );
+            {/* BottomMenu */}
+            <BottomMenu selectedRoute="/deliveries" />
+        </Container>
+    );
 };
 
 export default Deliveries;
