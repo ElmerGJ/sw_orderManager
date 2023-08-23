@@ -28,7 +28,7 @@ const ItemsStack = ({ onItemClick }) => {
           <Paper
             elevation={3}
             sx={{
-              borderRadius: 8, // Rounded corners
+              borderRadius: 6, // Rounded corners
               backgroundColor: '#efe8e8', // Background color
               minHeight: 80, // Increase the height
               display: 'flex',
