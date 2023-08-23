@@ -3,7 +3,7 @@ import { Container } from '@mui/material';
 import BottomMenu from '../components/nav/BottomMenu';
 import TopContainer from '../components/containers/TopContainer'; // Import the TopContainer component
 import ContentContainer from '../components/containers/ContentContainer'; // Import the ContentContainer component
-import ActionsContainer from '../components/containers/ActionsContainer'; // Import the ActionsContainer component
+// import ActionsContainer from '../components/containers/ActionsContainer'; // Import the ActionsContainer component
 import FilerContainer from '../components/containers/FilterContainer';
 import TitlePage from '../components/TitlePage';
 
@@ -23,9 +23,6 @@ const Deliveries = () => {
             <div style={{ maxHeight: 'calc(100vh - 350px)', overflowY: 'auto', padding: '10px' }}>
                 <ContentContainer />
             </div>
-
-            {/* Actions Container */}
-            <ActionsContainer />
 
             {/* BottomMenu */}
             <BottomMenu selectedRoute="/deliveries" />
