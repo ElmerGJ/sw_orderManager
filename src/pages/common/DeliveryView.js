@@ -1,13 +1,14 @@
 import React from 'react';
-// import { useParams } from 'react-router-dom';
 import {Container} from "@mui/material";
 import TopContainer from "../../components/containers/TopContainer";
 import TitlePage from "../../components/TitlePage";
 import ItemDetailsContainer from "../../components/containers/ItemDetailsContainer";
 import ActionsContainer from "../../components/containers/ActionsContainer";
 import BottomMenu from "../../components/nav/BottomMenu";
+import { useParams } from 'react-router-dom';
 
 const DeliveryView = () => {
+  const { itemId } = useParams();
   // const { deliveryId } = useParams(); // Get the delivery ID from URL parameter
 
   // Fetch and display delivery details based on the deliveryId
@@ -18,10 +19,11 @@ const DeliveryView = () => {
             <TopContainer />
 
             {/* Title Page Container */}
-            <TitlePage title={'Entrega #1'}/>
+            <TitlePage title={`Detalles de la Entrega #${itemId}`} />
+
 
             {/* Scrollable Content Container */}
-            <ItemDetailsContainer/>
+            <ItemDetailsContainer itemId={itemId} />
 
             {/* Actions Container */}
             <ActionsContainer />

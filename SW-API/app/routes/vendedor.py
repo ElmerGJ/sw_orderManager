@@ -3,9 +3,9 @@ from app.models import Solicitudes, Usuarios, db, Entregas
 from datetime import datetime
 from flask_jwt_extended import jwt_required, get_jwt_identity
 
-cliente_bp = Blueprint('cliente', __name__)
+vendedor_bp = Blueprint('vendedor', __name__)
 
-@cliente_bp.route('/api/cliente/crear-solicitud', methods=['POST'])
+@vendedor_bp.route('/api/vendedor/crear-solicitud', methods=['POST'])
 def crear_solicitud():
     data = request.json
     idSolicitante = data['idSolicitante']
@@ -14,10 +14,10 @@ def crear_solicitud():
     if solicitante is None:
         return jsonify({"error": "Solicitante no encontrado"}), 404
     
-    cliente = f"{solicitante.nombre} {solicitante.apellido}"
+    vendedor = f"{solicitante.nombre} {solicitante.apellido}"
 
     nueva_solicitud = Solicitudes(
-        cliente=cliente,
+        vendedor=vendedor,
         fecha_entrega=datetime.strptime(data['fecha_entrega'], '%Y-%m-%d').date(),
         lugar=data['lugar'],
         nombre_recibe=data['nombre_recibe'],
@@ -40,12 +40,12 @@ def crear_solicitud():
     
     return jsonify({"mensaje": "Solicitud creada exitosamente"})
 
-@cliente_bp.route('/api/cliente/mis-solicitudes', methods=['GET'])
+@vendedor_bp.route('/api/vendedor/mis-solicitudes', methods=['GET'])
 @jwt_required()
 def mis_solicitudes():
-    id_cliente = get_jwt_identity()
+    id_vendedor = get_jwt_identity()
 
-    solicitudes = Solicitudes.query.filter_by(idSolicitante=id_cliente).all()
+    solicitudes = Solicitudes.query.filter_by(idSolicitante=id_vendedor).all()
 
     solicitudes_data = []
     for solicitud in solicitudes:
@@ -58,10 +58,10 @@ def mis_solicitudes():
         
         solicitud_data = {
             "idSolicitud": solicitud.idSolicitud,
-            "cliente": solicitud.cliente,
+            "vendedor": solicitud.vendedor,
             "nombre_repartidor": repartidor_nombre,
             "estado_entrega": entrega.estado if entrega else None,
-            "id_cliente": id_cliente,
+            "id_cliente": id_vendedor,
             "id_repartidor": entrega.idChofer if entrega else None
         }
         solicitudes_data.append(solicitud_data)

@@ -1,51 +1,51 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Stack, Paper, Typography } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
-// import Item from '../items/Item'; // Update the import path
 
 const ItemsStack = ({ onItemClick }) => {
-  const items = [
-    { id: 1, text: 'Entrega #1' },
-    { id: 1, text: 'Entrega #2' },
-    { id: 1, text: 'Entrega #3' },
-    { id: 2, text: 'Entrega #4' },
-    { id: 2, text: 'Entrega #5' },
-    { id: 2, text: 'Entrega #6' },
-    { id: 3, text: 'Entrega #7' },
-    { id: 3, text: 'Entrega #8' },
-    { id: 3, text: 'Entrega #9' },
-    { id: 4, text: 'Entrega #10' },
-  ];
+  const [solicitudes, setSolicitudes] = useState([]);
+
+  useEffect(() => {
+    // Fetch the data from the API endpoint /api/admin/solicitudes
+    fetch('http://localhost:5000/api/admin/solicitudes')
+      .then(response => response.json())
+      .then(data => {
+        setSolicitudes(data);
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  }, []);
 
   return (
-    <Stack spacing={2} style={{padding:'10px'}}>
-      {items.map((item) => (
-        <RouterLink
-          key={item.id}
-          to={`/delivery-view/${item.id}`}
-          style={{ textDecoration: 'none' }} // Remove underline
+    <Stack spacing={2} style={{ padding: '10px' }}>
+      {solicitudes.map((solicitud) => (
+        <Paper
+          key={solicitud.idSolicitud}
+          elevation={3}
+          sx={{
+            borderRadius: 6,
+            backgroundColor: '#efe8e8',
+            minHeight: 80,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            cursor: 'pointer',
+          }}
+          onClick={() => onItemClick(solicitud.idSolicitud)}
         >
-          <Paper
-            elevation={3}
-            sx={{
-              borderRadius: 6, // Rounded corners
-              backgroundColor: '#efe8e8', // Background color
-              minHeight: 80, // Increase the height
-              display: 'flex',
-              alignItems: 'center', // Center the content vertically
-              justifyContent: 'center', // Center the content horizontally
-              cursor: 'pointer', // Show pointer cursor on hover
-            }}
-            onClick={() => onItemClick(item.id)}
+          <RouterLink
+            to={`/delivery-view/${solicitud.idSolicitud}`}
+            style={{ textDecoration: 'none', width: '100%' }}
           >
             <Typography
               variant="body1"
               sx={{ fontWeight: 'bold', textDecoration: 'none', color: 'inherit' }}
             >
-              {item.text}
+              {`Entrega #${solicitud.idSolicitud}`}
             </Typography>
-          </Paper>
-        </RouterLink>
+          </RouterLink>
+        </Paper>
       ))}
     </Stack>
   );

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Login from './pages/login/Login';
 import LandingPage from './pages/LandingPage';
-
 import './App.css';
 import BottomMenu from './components/nav/BottomMenu'; // Import the modified BottomMenu component
 import Deliveries from './pages/Deliveries';
@@ -29,15 +28,38 @@ const App = () => {
                 <Route path="/landing" element={loggedIn ? (<><LandingPage setLoggedIn={setLoggedIn} />
                                 <BottomMenu selectedRoute="/landing" /> {/* Pass selected route */}</>
                         ) : (
-                            <Navigate to="/login" />)}
+                            <Navigate to="/" />)}
                 />
-                <Route path="/deliveries" element={<Deliveries />} />
-                <Route path="/requests" element={<Requests />} />
-                <Route path="/stats" element={<Stats />} />
-                <Route path="/settings" element={<Settings />} />
-                {/* eslint-disable-next-line react/jsx-no-comment-textnodes */}
-                <Route path="/delivery-view/:itemId" element={<DeliveryView />}/>  // Use the appropriate component for DeliveryView
-                <Route path="/account" element={<Account/>}/>/> // Use the appropriate component for Account
+                <Route path="/deliveries" element={loggedIn ? (<><Deliveries setLoggedIn={setLoggedIn} />
+                                <BottomMenu selectedRoute="/deliveries" /> {/* Pass selected route */}</>
+                        ) : (
+                            <Navigate to="/" />)}
+                />
+                <Route path="/requests" element={loggedIn ? (<><Requests setLoggedIn={setLoggedIn} />
+                                <BottomMenu selectedRoute="/requests" /> {/* Pass selected route */}</>
+                        ) : (
+                            <Navigate to="/" />)}
+                />
+                <Route path="/stats" element={loggedIn ? (<><Stats setLoggedIn={setLoggedIn} />
+                                <BottomMenu selectedRoute="/stats" /> {/* Pass selected route */}</>
+                        ) : (
+                            <Navigate to="/" />)}
+                />
+                <Route path="/settings" element={loggedIn ? (<><Settings setLoggedIn={setLoggedIn} />
+                                <BottomMenu selectedRoute="/settings" /> {/* Pass selected route */}</>
+                        ) : (
+                            <Navigate to="/" />)}
+                />
+                <Route path="/delivery-view/:itemId" element={loggedIn ? (<><DeliveryView setLoggedIn={setLoggedIn} />
+                                <BottomMenu selectedRoute="/delivery-view/:itemId" /> {/* Pass selected route */}</>
+                        ) : (
+                            <Navigate to="/" />)}
+                />
+                <Route path="/account" element={loggedIn ? (<><Account setLoggedIn={setLoggedIn} />
+                                <BottomMenu selectedRoute="/account" /> {/* Pass selected route */}</>
+                        ) : (
+                            <Navigate to="/" />)}
+                />
             </Routes>
             {/* Place the BottomMenu component here outside the Routes */}
             {/*{loggedIn && <BottomMenu />} ///////////////////////////////////// PROBLEM HERE ///////////////////////////////////////////////*/}
