@@ -8,29 +8,33 @@ import ActionsContainer from "../../components/containers/ActionsContainer";
 import BottomMenu from "../../components/nav/BottomMenu";
 
 const DeliveryView = () => {
-  // const { deliveryId } = useParams(); // Get the delivery ID from URL parameter
 
-  // Fetch and display delivery details based on the deliveryId
-  return (
-    <div>
-        <Container maxWidth="sm" sx={{ padding: 2 }}>
-            {/* Top Container */}
-            <TopContainer />
+    // Assume you have a way to get the user's role, for example from a global state
+    const userRole = 'admin'; // Replace this with the actual user's role
 
-            {/* Title Page Container */}
-            <TitlePage title={'Entrega #1'}/>
+    // const { deliveryId } = useParams(); // Get the delivery ID from URL parameter
 
-            {/* Scrollable Content Container */}
-            <ItemDetailsContainer/>
+    // Fetch and display delivery details based on the deliveryId
+    return (
+        <div>
+            <Container maxWidth="sm" sx={{ padding: 2 }}>
+                {/* Top Container */}
+                <TopContainer />
 
-            {/* Actions Container */}
-            <ActionsContainer />
+                {/* Title Page Container */}
+                <TitlePage title={'Entrega #1'}/>
 
-            {/* BottomMenu */}
-            <BottomMenu selectedRoute="/deliveries" />
-        </Container>
-    </div>
-  );
+                {/* Scrollable Content Container */}
+                <ItemDetailsContainer/>
+
+                {/* Conditionally render ActionsContainer for admin user */}
+                {userRole === 'admin' && <ActionsContainer page={'DeliveryView'} />}
+
+                {/* BottomMenu */}
+                <BottomMenu selectedRoute="/deliveries" />
+            </Container>
+        </div>
+    );
 };
 
 export default DeliveryView;

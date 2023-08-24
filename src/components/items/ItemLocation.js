@@ -17,7 +17,7 @@ const ItemLocation = () => {
           position: 'relative', // Position the container
           backgroundColor: 'transparent',
           overflow: 'hidden', // Hide overflow to prevent the image from overflowing
-          height: '30%', // Set height to 30% of parent container
+          height: '10vh', // Set height to 30% of parent container
         }}
       >
         {/* Location Image */}
