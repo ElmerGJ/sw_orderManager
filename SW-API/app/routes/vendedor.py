@@ -15,7 +15,7 @@ def crear_solicitud():
         return jsonify({"error": "Solicitante no encontrado"}), 404
     
     vendedor = f"{solicitante.nombre} {solicitante.apellido}"
-
+    estado = "pendiente"
     nueva_solicitud = Solicitudes(
         vendedor=vendedor,
         fecha_entrega=datetime.strptime(data['fecha_entrega'], '%Y-%m-%d').date(),
@@ -32,7 +32,7 @@ def crear_solicitud():
         preparacion=data['preparacion'],
         idRTV=idSolicitante,
         idSolicitante=idSolicitante,
-        Estado=data['Estado']
+        Estado=estado
     )
     
     db.session.add(nueva_solicitud)

@@ -11,7 +11,7 @@ def listar_solicitudes():
     solicitudes_json = [
         {
             'idSolicitud': solicitud.idSolicitud,
-            'cliente': solicitud.cliente,
+            'vendedor': solicitud.vendedor,
             'fecha_entrega': solicitud.fecha_entrega,
             'lugar': solicitud.lugar,
             'nombre_recibe': solicitud.nombre_recibe,
