@@ -13,11 +13,15 @@ const ActionsContainer = ({ page }) => {
                 <ActionButton btn_type={'CancelButton'} />
             </Box>
         );
-    } else if (page === 'RequestView') {
+    } else {
         return (
-
-            <ActionButton btn_type={'AcceptButton'} />,
+            <Box sx={{
+                display: 'center',
+                justifyContent:'center'
+            }}>
+                <ActionButton btn_type={'AcceptButton'} />
                 <ActionButton btn_type={'DeclineButton'} />
+            </Box>
         );
     }
 

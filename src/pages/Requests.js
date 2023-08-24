@@ -34,7 +34,7 @@ const Requests = () => {
             </div>
 
             {/* BottomMenu */}
-            <BottomMenu selectedRoute="/deliveries" />
+            <BottomMenu selectedRoute="/Requests" />
         </Container>
     );
 };

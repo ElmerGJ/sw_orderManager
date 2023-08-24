@@ -12,6 +12,7 @@ import Settings from './pages/Settings';
 import DeliveryView from "./pages/common/DeliveryView";
 import Account from "./pages/Account";
 import RequestForm from "./pages/RequestForm";
+import RequestView from "./pages/common/RequestView";
 
 const App = () => {
     const [loggedIn, setLoggedIn] = useState(false);
@@ -39,6 +40,7 @@ const App = () => {
                 <Route path="/settings" element={<Settings />} />
                 {/* eslint-disable-next-line react/jsx-no-comment-textnodes */}
                 <Route path="/delivery-view/:itemId" element={<DeliveryView />}/>  // Use the appropriate component for DeliveryView
+                <Route path="/request-view/:itemId" element={<RequestView />}/>  // Use the appropriate component for DeliveryView
                 <Route path="/account" element={<Account/>}/>/> // Use the appropriate component for Account
                 <Route path="/request-form" element={<RequestForm />}/>
             </Routes>
