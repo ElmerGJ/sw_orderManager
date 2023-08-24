@@ -1,7 +1,26 @@
 import React from 'react';
 import { Box, Select, MenuItem, TextField, InputAdornment, InputLabel } from '@mui/material';
 
-const FiltersContainer = () => {
+const FiltersContainer = ({page}) => {
+    const selectOptions = {
+        DeliveryView: [
+            { value: 'all', label: 'Todos' },
+            { value: 'option1', label: 'Entregadas' },
+            { value: 'option2', label: 'Canceladas' },
+            { value: 'option3', label: 'Reprogramadas' },
+        ],
+        RequestView: [
+            { value: 'all', label: 'Todos' },
+            { value: 'option1', label: 'Nuevas' }, // Replace with your options
+            { value: 'option2', label: 'Aceptadas' }, // Replace with your options
+            { value: 'option2', label: 'Rechazadas' }, // Replace with your options
+            // Add more options as needed
+        ],
+    };
+
+    const options = selectOptions[page] || [];
+
+
     return (
         <Box
             sx={{
@@ -21,19 +40,20 @@ const FiltersContainer = () => {
             <Select
                 id="filter-select"
                 variant="outlined"
-                defaultValue="all" // Set a default value
+                defaultValue={options[0]?.value || ''}
                 sx={{
                     backgroundColor: '#98134F',
                     color: 'white',
                     height: '35px',
                     borderRadius: 4,
-                    fontSize:12,
+                    fontSize: 12,
                 }}
             >
-                <MenuItem value="all">Todos</MenuItem>
-                <MenuItem value="option1">Entregadas</MenuItem>
-                <MenuItem value="option2">Canceladas</MenuItem>
-                <MenuItem value="option3">Reprogramadas</MenuItem>
+                {options.map((option) => (
+                    <MenuItem key={option.value} value={option.value}>
+                        {option.label}
+                    </MenuItem>
+                ))}
             </Select>
             <InputLabel
                 htmlFor="filter-select"
