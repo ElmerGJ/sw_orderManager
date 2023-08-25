@@ -4,15 +4,16 @@ import ExitImage from '../../assets/exit.png'; // Import the exit image
 
 const ExitButton = () => {
   // Handle the exit action here
-  const handleExit = () => {
-    // Implement the logic to perform the exit action
-    // For example, you can clear localStorage and navigate to the login page
-    localStorage.clear();
-    window.location.href = '/'; // Change this URL to your login page
-  };
+  const handleLogout = () => {
+    // Eliminar el token almacenado en localStorage u otra ubicación
+    localStorage.removeItem('token'); // Cambia 'tuToken' al nombre real del token
+
+    // Redirigir a la página de inicio de sesión
+    window.location.href = '/';
+};
 
   return (
-    <Button color="primary" variant="text" onClick={handleExit}>
+    <Button color="primary" variant="text" onClick={handleLogout}>
       <img src={ExitImage} alt="Exit" style={{ width: '24px', height: '24px' }} /> {/* Image */}
     </Button>
   );

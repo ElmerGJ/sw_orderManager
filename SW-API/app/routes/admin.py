@@ -148,7 +148,7 @@ def detalles_entrega(idSolicitud):
             'tanques': solicitud.cantidad_tanques,
             'galones': solicitud.cantidad_galones,
             'tienda': solicitud.origen_producto,
-            'cliente': solicitud.cliente
+            'nombre recibe': solicitud.nombre_recibe
 
         },
         'lugar': solicitud.lugar,

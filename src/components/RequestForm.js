@@ -72,6 +72,14 @@ const RequestForm = ({ onClose }) => {
                     margin="normal"
                 />
                 <TextField
+                    label="nombre"
+                    name="nombre"
+                    value={formData.vendedor}
+                    onChange={handleChange}
+                    fullWidth
+                    margin="normal"
+                />
+                <TextField
                     label="Fecha de Entrega"
                     name="fecha_entrega"
                     type="date"

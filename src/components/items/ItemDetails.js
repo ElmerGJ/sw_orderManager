@@ -37,7 +37,7 @@ console.log(details)
                 Vendedor: {details.solicitante.nombre} {details.solicitante.apellido}
             </Typography>
             <Typography variant="body1" gutterBottom>
-                Cliente: {details.solicitud.cliente}
+                Cliente: {details.solicitud.nombre}
             </Typography>
             <Typography variant="body1" gutterBottom>
                 Tanques: {details.solicitud.tanques}
