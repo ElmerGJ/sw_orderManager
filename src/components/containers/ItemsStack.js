@@ -18,6 +18,7 @@ const ItemsStack = ({ onItemClick }) => {
   }, []);
 
   return (
+<<<<<<< HEAD
     <Stack spacing={2} style={{ padding: '10px' }}>
       {solicitudes.map((solicitud) => (
         <Paper
@@ -48,6 +49,38 @@ const ItemsStack = ({ onItemClick }) => {
         </Paper>
       ))}
     </Stack>
+=======
+      <Stack spacing={2} style={{padding:'10px'}}>
+        {items.map((item) => (
+            <RouterLink
+                key={item.id}
+                to={`/delivery-view/${item.id}`}
+                style={{ textDecoration: 'none' }} // Remove underline
+            >
+              <Paper
+                  elevation={3}
+                  sx={{
+                    borderRadius: 6, // Rounded corners
+                    backgroundColor: '#efe8e8', // Background color
+                    minHeight: 80, // Increase the height
+                    display: 'flex',
+                    alignItems: 'center', // Center the content vertically
+                    justifyContent: 'center', // Center the content horizontally
+                    cursor: 'pointer', // Show pointer cursor on hover
+                  }}
+                  onClick={() => onItemClick(item.id)}
+              >
+                <Typography
+                    variant="body1"
+                    sx={{ fontWeight: 'bold', textDecoration: 'none', color: 'inherit' }}
+                >
+                  {item.text}
+                </Typography>
+              </Paper>
+            </RouterLink>
+        ))}
+      </Stack>
+>>>>>>> 2e04b8d57cc6b5811c218e53b7e7aec61f120949
   );
 };
 

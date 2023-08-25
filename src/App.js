@@ -9,6 +9,8 @@ import Stats from './pages/Stats';
 import Settings from './pages/Settings';
 import DeliveryView from "./pages/common/DeliveryView";
 import Account from "./pages/Account";
+import RequestForm from "./pages/RequestForm";
+
 const App = () => {
     const [loggedIn, setLoggedIn] = useState(false);
 
@@ -54,6 +56,17 @@ const App = () => {
                         ) : (
                             <Navigate to="/" />)}
                 />
+<<<<<<< HEAD
+=======
+                <Route path="/deliveries" element={<Deliveries />} />
+                <Route path="/requests" element={<Requests />} />
+                <Route path="/stats" element={<Stats />} />
+                <Route path="/settings" element={<Settings />} />
+                {/* eslint-disable-next-line react/jsx-no-comment-textnodes */}
+                <Route path="/delivery-view/:itemId" element={<DeliveryView />}/>  // Use the appropriate component for DeliveryView
+                <Route path="/account" element={<Account/>}/>/> // Use the appropriate component for Account
+                <Route path="/request-form" element={<RequestForm />}/>
+>>>>>>> 2e04b8d57cc6b5811c218e53b7e7aec61f120949
             </Routes>
             {/* Place the BottomMenu component here outside the Routes */}
             {/*{loggedIn && <BottomMenu />} ///////////////////////////////////// PROBLEM HERE ///////////////////////////////////////////////*/}

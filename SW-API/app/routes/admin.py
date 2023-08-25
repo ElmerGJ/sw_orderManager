@@ -11,7 +11,11 @@ def listar_solicitudes():
     solicitudes_json = [
         {
             'idSolicitud': solicitud.idSolicitud,
+<<<<<<< HEAD
             'vendedor': solicitud.vendedor,
+=======
+            'cliente': solicitud.cliente,
+>>>>>>> 2e04b8d57cc6b5811c218e53b7e7aec61f120949
             'fecha_entrega': solicitud.fecha_entrega,
             'lugar': solicitud.lugar,
             'nombre_recibe': solicitud.nombre_recibe,
@@ -60,12 +64,45 @@ def aceptar_rechazar_solicitud(id_solicitud):
         return jsonify({'error': 'Falta el campo "accion" en el JSON'}), 400
 
 
+<<<<<<< HEAD
 @admin_bp.route('/api/admin/asignar-o-editar-entrega/<int:idSolicitud_or_idEntrega>/repartidor/<int:idNuevoChofer>', methods=['PUT'])
 def asignar_o_editar_entrega(idSolicitud_or_idEntrega, idNuevoChofer):
     solicitud_o_entrega = Solicitudes.query.get(idSolicitud_or_idEntrega) or Entregas.query.get(idSolicitud_or_idEntrega)
 
     if solicitud_o_entrega is None:
         return jsonify({'error': 'Solicitud o entrega no encontrada'}), 404
+=======
+@admin_bp.route('/api/admin/asignar-entrega/<int:idSolicitud>/<int:idChofer>', methods=['PUT'])
+# Aquí debes implementar la lógica para asignar la entrega a un repartidor
+def asignar_entrega(idSolicitud, idChofer):
+    solicitud = Solicitudes.query.get(idSolicitud)
+    if solicitud is None:
+        return jsonify({'error': 'Solicitud no encontrada'}), 404
+
+    repartidor = Usuarios.query.get(idChofer)
+    if repartidor is None:
+        return jsonify({'error': 'Repartidor no encontrado'}), 404
+
+    if repartidor.tipo == 'repartidor':
+        entrega_existente = Entregas.query.filter_by(idSolicitud=idSolicitud).first()
+        if entrega_existente:
+            return jsonify({'error': 'La solicitud ya tiene una entrega asignada'}), 400
+
+        nueva_entrega = Entregas(idSolicitud=idSolicitud, idChofer=repartidor.idUsuario, estado='pendiente')
+        db.session.add(nueva_entrega)
+        db.session.commit()
+        return jsonify({'mensaje': f'Solicitud asignada al repartidor {repartidor.nombre} {repartidor.apellido}'})
+
+    else:
+        return jsonify({'error': 'El usuario no es de tipo "repartidor"'}), 400
+    
+
+@admin_bp.route('/api/admin/editar-entrega/<int:idEntrega>/repartidor/<int:idNuevoChofer>', methods=['PUT'])
+def editar_entrega(idEntrega, idNuevoChofer):
+    entrega = Entregas.query.get(idEntrega)
+    if entrega is None:
+        return jsonify({'error': 'Entrega no encontrada'}), 404
+>>>>>>> 2e04b8d57cc6b5811c218e53b7e7aec61f120949
 
     nuevo_chofer = Usuarios.query.get(idNuevoChofer)
     if nuevo_chofer is None:
@@ -74,6 +111,7 @@ def asignar_o_editar_entrega(idSolicitud_or_idEntrega, idNuevoChofer):
     if nuevo_chofer.tipo != 'repartidor':
         return jsonify({'error': 'El usuario seleccionado no es de tipo "repartidor"'}), 400
 
+<<<<<<< HEAD
     if isinstance(solicitud_o_entrega, Solicitudes):
         entrega_existente = Entregas.query.filter_by(idSolicitud=solicitud_o_entrega.idSolicitud).first()
         if entrega_existente:
@@ -154,3 +192,11 @@ def detalles_entrega(idSolicitud):
         'lugar': solicitud.lugar,
         'estado': entrega.estado
     })
+=======
+    entrega.idChofer = nuevo_chofer.idUsuario
+    entrega.estado = 'pendiente'
+    db.session.commit()
+
+    return jsonify({'mensaje': f'Repartidor de la entrega actualizado a {nuevo_chofer.nombre} {nuevo_chofer.apellido}'})
+
+>>>>>>> 2e04b8d57cc6b5811c218e53b7e7aec61f120949

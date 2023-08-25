@@ -11,6 +11,7 @@ const Requests = () => {
     const handleAddClick = () => {
         // Handle the add button click here
     };
+<<<<<<< HEAD
 
     const userRole = 'seller'; // Replace this with the actual user's role
 
@@ -33,6 +34,30 @@ const Requests = () => {
 
             </div>
 
+=======
+
+    const userRole = 'seller'; // Replace this with the actual user's role
+
+    return (
+        <Container maxWidth="sm" sx={{ padding: 2 }}>
+            {/* Top Container */}
+            <TopContainer />
+
+            {/* Title Page Container */}
+            <TitlePage title={'Solicitudes'}/>
+
+            {/* Filter Container */}
+            <FilerContainer page={'RequestView'}/>
+
+            {/* Scrollable Content Container */}
+            <div style={{ maxHeight: 'calc(100vh - 350px)', overflowY: 'auto', padding: '10px' }}>
+                <ContentContainer />
+
+                {userRole === 'seller' && <FloatButton onClick={handleAddClick} />}
+
+            </div>
+
+>>>>>>> 2e04b8d57cc6b5811c218e53b7e7aec61f120949
             {/* BottomMenu */}
             <BottomMenu selectedRoute="/deliveries" />
         </Container>

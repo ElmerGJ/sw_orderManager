@@ -31,7 +31,11 @@ class Entregas(db.Model):
 
 class Solicitudes(db.Model):
     idSolicitud = db.Column(db.Integer, primary_key=True, autoincrement=True)
+<<<<<<< HEAD
     vendedor = db.Column(db.String(100))
+=======
+    cliente = db.Column(db.String(100))
+>>>>>>> 2e04b8d57cc6b5811c218e53b7e7aec61f120949
     fecha_entrega = db.Column(db.Date)
     lugar = db.Column(db.String(100))
     nombre_recibe = db.Column(db.String(100))
